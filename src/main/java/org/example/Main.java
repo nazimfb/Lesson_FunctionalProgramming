@@ -22,8 +22,9 @@ public class Main {
 
 //        testPredicate(p -> p.getAge() > 18);
 //        testPredicate(p -> p.getAge() > 20);
-//        testFunction(name -> new Person(1,20,name));
-//        testFunction(name -> new Person(2,name.length(),name));
+
+        testFunction(name -> new Person(1,20,name));
+        testFunction(name -> new Person(2,name.length(),name));
 //
         testConsumer(System.out::println);
 //        testConsume2r(Person::getAge);
@@ -32,13 +33,12 @@ public class Main {
 //        testOptional2(new Person(1,5,"Nazim"));
         System.out.println(generatePeople(Arrays.asList(
                 new Person(1,1,"a"),
-                new Person(2,3,"p2"))));
+                new Person(2,30,"p2"))));
     }
 
     private static List<Integer> generatePeople(List<Person> people) {
         return people.stream().filter(p -> p.getAge()>5).map(Person::getId).collect(Collectors.toList());
     }
-
 
     public static void testFunction(Function<String, Person> function){
         Person p = function.apply("Asiman");
@@ -54,10 +54,11 @@ public class Main {
         System.out.println(res);
     }
 
-    public static void testConsume2r(Consumer<Person> consumer){
+    public static void testConsumer2(Consumer<Person> consumer){
         consumer.accept(new Person(1,40,"Nazim"));
         System.out.println(consumer);
     }
+
     public static void testConsumer(Consumer<String> consumer){
         consumer
                 .andThen(p -> System.out.println(p + p))
@@ -76,6 +77,7 @@ public class Main {
 //                .orElse(new Person(100, 0,"Default"))
                 .orElseThrow(RuntimeException::new));
     }
+
     public static void testOptional(Person p){
         Optional.ofNullable(p).
                 filter(item -> item.getAge() > 18)
